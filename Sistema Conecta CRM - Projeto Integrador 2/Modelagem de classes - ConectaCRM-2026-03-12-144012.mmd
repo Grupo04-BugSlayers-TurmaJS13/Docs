@@ -1,0 +1,56 @@
+---
+config:
+  layout: elk
+  theme: neo-dark
+  look: neo
+---
+classDiagram
+direction LR
+    class Cliente {
+	    -id: number
+	    -nome: string
+	    -email: string
+	    -telefone: string
+	    -sites: string
+	    +cadastrar() : post
+	    +atualizar() : put
+	    +excluir() : delete
+	    +listarClientes() : get
+	    +listarClientesid() : get
+	    +listarClienteNome() : get
+    }
+
+    class Oportunidade {
+	    -id: number
+	    -servico: string
+	    -valor: decimal
+	    -status: string
+	    -data_criacao: Date
+	    -cliente_id: number
+	    -usuario_id: number
+	    +cadastrar() : post
+	    +atualizarStatus(novoStatus: string) : put
+	    +atribuirUsuario(usuario: Usuario) : void
+	    +atribuirCliente(cliente: Cliente) : void
+	    +listarOportunidades() : get
+	    +listarOportunidadesId() : get
+	    +deletarOportunidades() : delete
+	    +atualizarOportunidades() : put
+    }
+
+    class Usuario {
+	    -id: number
+	    -nome: string
+	    -usuario: string
+	    -senha: string
+	    -foto: string
+	    +autenticar(email: string, senha: string) : bool
+	    +cadastrar() : post
+	    +atualizar() : put
+	    +listarPorNome() : get
+	    +listarUsuarios() : get
+	    +listarUsuariosId() : get
+    }
+
+    Cliente "n" -- "1" Oportunidade
+    Oportunidade "n" -- "1" Usuario
